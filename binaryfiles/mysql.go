@@ -42,6 +42,13 @@ func main() {
 	}
 	defer db.Close()
 
+	/* Table definition */
+	// CREATE TABLE binary_table (
+	// 	id int NOT NULL auto_increment,
+	// 	blobdata MEDIUMBLOB,
+	// 	PRIMARY KEY(id)
+	// )
+
 	// mysqlへ保存
 	// blob型に入れる場合でもstringにcastする
 	mydata := string(b)
