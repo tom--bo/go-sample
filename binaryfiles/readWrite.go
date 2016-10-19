@@ -11,34 +11,51 @@ import (
 
 func main() {
 	// ファイルからの読み出し
-	b, err := ioutil.ReadFile("miso_soup.jpg")
 	// b []byte
-	if err != nil {
-		panic(err)
-
-	}
+	b := readFromFile("miso_soup.jpg")
 
 	// ファイルへ書き込み
-	// err = ioutil.WriteFile("test.jpg", b, 0644)
-	// if err != nil {
-	// 	panic(err)
-	// }
+	writeFile("test.jpg", b)
 
 	webdavURL := "http://54.249.13.5:80/webdav/test.jpg"
 	/* webdavへpost */
 	// postWebdav(webdavURL, b)
 
 	/* webdavから取得 */
-	data := getWebdav(webdavURL)
+	// data := getWebdav(webdavURL)
+
+	///////////////////
+	/* mysqlへの接続 */
+	///////////////////
 
 	// mysqlへ保存
 
 	// mysqlから取得
 
+	///////////////////
+	/* redisへの接続 */
+	///////////////////
+
 	// redisへ保存
 
 	// redisから取得
 
+}
+
+func readFromFile(filename string) []byte {
+	b, err := ioutil.ReadFile("miso_soup.jpg")
+	// b []byte
+	if err != nil {
+		panic(err)
+	}
+	return b
+}
+
+func writeFile(filename string, data []byte) {
+	err = ioutil.WriteFile(filename, data, 0777)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func postWebdav(url string, data []byte) {
