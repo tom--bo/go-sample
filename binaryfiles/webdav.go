@@ -10,40 +10,25 @@ import (
 )
 
 func main() {
+	remoteIP := "54.199.151.194"
+	webdavURL := "http://" + remoteIP + ":80/webdav/test.jpg"
+
 	// ファイルからの読み出し
 	// b []byte
 	b := readFromFile("miso_soup.jpg")
 
-	// ファイルへ書き込み
-	writeFile("test.jpg", b)
-
-	webdavURL := "http://54.249.13.5:80/webdav/test.jpg"
 	/* webdavへpost */
-	// postWebdav(webdavURL, b)
+	postWebdav(webdavURL, b)
 
 	/* webdavから取得 */
-	// data := getWebdav(webdavURL)
+	data := getWebdav(webdavURL)
 
-	///////////////////
-	/* mysqlへの接続 */
-	///////////////////
-
-	// mysqlへ保存
-
-	// mysqlから取得
-
-	///////////////////
-	/* redisへの接続 */
-	///////////////////
-
-	// redisへ保存
-
-	// redisから取得
-
+	// ファイルへ書き込み
+	writeFile("test.jpg", data)
 }
 
 func readFromFile(filename string) []byte {
-	b, err := ioutil.ReadFile("miso_soup.jpg")
+	b, err := ioutil.ReadFile(filename)
 	// b []byte
 	if err != nil {
 		panic(err)
@@ -52,7 +37,7 @@ func readFromFile(filename string) []byte {
 }
 
 func writeFile(filename string, data []byte) {
-	err = ioutil.WriteFile(filename, data, 0777)
+	err := ioutil.WriteFile(filename, data, 0777)
 	if err != nil {
 		panic(err)
 	}
