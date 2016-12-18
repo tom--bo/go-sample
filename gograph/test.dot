@@ -1,0 +1,8 @@
+digraph G {
+	a->b[ label=test ];
+	a->c[ label=test2 ];
+	b->c[ label=test3 ];
+	c->d[ label=test4 ];
+    c;
+}
+
